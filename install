@@ -1,0 +1,12 @@
+#!/bin/bash
+
+BOOKMARKS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+echo >> $HOME/.bashrc
+echo "# Bookmarks: Vim inspired bookmarks for directory navigation" >> $HOME/.bashrc
+echo "# ----------------------------------------------------------" >> $HOME/.bashrc
+echo "PATH=\"\$PATH:$BOOKMARKS_DIR\"" >> $HOME/.bashrc
+echo "alias j='. $BOOKMARKS_DIR/src/jump'" >> $HOME/.bashrc
+echo "alias m='$BOOKMARKS_DIR/src/mark'" >> $HOME/.bashrc
+
+
+
