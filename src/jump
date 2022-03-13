@@ -1,3 +1,5 @@
 #!/bin/bash
 SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-cd $(cat $SOURCE_DIR/bookmarks)
+MARK_NAME=$1
+JUMP_TO=$(cat $SOURCE_DIR/bookmarks | grep "^$MARK_NAME .*" | sed "s|^$MARK_NAME\s\+||g")
+cd $JUMP_TO

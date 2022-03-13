@@ -1,4 +1,4 @@
 #!/bin/bash
+MARK_NAME=$1
 SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-echo $(pwd) > $SOURCE_DIR/bookmarks
-echo "Marked $(pwd)"
+sed -i "s|^$MARK_NAME .*|$MARK_NAME $(pwd)|g" $SOURCE_DIR/bookmarks
