@@ -1,4 +1,36 @@
 #!/bin/bash
-MARK_NAME=$1
+
 SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-sed -i "s|^$MARK_NAME .*|$MARK_NAME $(pwd)|g" $SOURCE_DIR/bookmarks
+BOOKMARKS_PATH=$SOURCE_DIR/bookmarks
+MARK_HIST_PATH=$SOURCE_DIR/.mark_history
+
+OPT_LIST_RECENT="-ls"
+OPT_LIST_ALL="-lsa"
+
+DeleteDuplicates_KeepLastOccurance(){
+	COLUMN_TO_SORT=$(($1+1)) # add 1 to account for temp line number
+	FILE=$2
+	nl $2 | tac | sort -u -k "$COLUMN_TO_SORT,$COLUMN_TO_SORT" | sort -n | cut -f1 --complement
+}
+
+if [ $1 == $OPT_LIST_RECENT ];
+then
+	NUM_LINES_TO_SHOW="${2:-10}"
+	DeleteDuplicates_KeepLastOccurance 1 $MARK_HIST_PATH | tac | head -$NUM_LINES_TO_SHOW
+
+elif [ $1 == $OPT_LIST_ALL ];
+then
+	cat $SOURCE_DIR/bookmarks
+
+elif [[ "$1" == [a-z] ]]; 
+then
+	MARK_NAME=$1
+	sed -i "s|^$MARK_NAME .*|$MARK_NAME $(pwd)|g" $BOOKMARKS_PATH
+	echo $MARK_NAME $(pwd) >> $MARK_HIST_PATH
+else
+	>&2 echo "Invalid input"
+	exit 1
+fi
+
+exit 0
+
