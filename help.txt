@@ -1,0 +1,17 @@
+Usage: 
+  m MARK_NAME              set mark to present directory
+  j MARK_NAME              jump to mark
+  m [OPTION]      
+
+MARK_NAME
+  [a-z]                    lower case alphabet
+
+OPTIONS
+  -ls [N]                  list N most recently set marks, defaults to 10
+  -lsa                     list all marks
+  --help                   show help page
+
+Examples:
+  m w        Set the mark 'w' to present working directory
+  j w        Jump to mark 'w'
+  m -ls      Show 10 most recently set marks
