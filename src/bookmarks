@@ -1,5 +1,5 @@
-a /usr/bin
-b /etc
+a 
+b 
 c 
 d 
 e 
@@ -22,5 +22,5 @@ u
 v 
 w 
 x 
-y
-z
+y 
+z 
